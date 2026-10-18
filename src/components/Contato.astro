@@ -1,0 +1,79 @@
+---
+import { perfil } from '../data/perfil';
+// Com `perfil.formulario` preenchido, o formulário envia para esse serviço.
+// Sem ele, mas com e-mail, abre o app de e-mail da pessoa já preenchido.
+const temFormulario = Boolean(perfil.formulario || perfil.email);
+---
+<section id="contato" class="wrap section contato">
+  <div class="contato__texto">
+    <p class="eyebrow">Contato</p>
+    <h2 class="h2 contato__titulo">Vamos abrir um <span class="accent">novo registro?</span></h2>
+    <p class="contato__p">Tem um projeto, uma vaga ou só quer trocar uma ideia? Me chama.</p>
+    <ul class="contato__lista mono">
+      {perfil.email && (
+        <li><a href={`mailto:${perfil.email}`}><span class="icon-btn" aria-hidden="true">@</span>{perfil.email}</a></li>
+      )}
+      <li><a href={perfil.linkedin} target="_blank" rel="noopener"><span class="icon-btn" aria-hidden="true">in</span>linkedin.com/in/nata-muniz</a></li>
+      <li><a href={perfil.github} target="_blank" rel="noopener"><span class="icon-btn" aria-hidden="true">gh</span>github.com/natamuniz</a></li>
+    </ul>
+  </div>
+
+  {temFormulario ? (
+    <form class="card contato__form" action={perfil.formulario || undefined} method="post" data-email={perfil.formulario ? undefined : perfil.email}>
+      <div class="contato__linha">
+        <label>Nome<input name="nome" type="text" autocomplete="name" required /></label>
+        <label>E-mail<input name="email" type="email" autocomplete="email" required /></label>
+      </div>
+      <label>Tipo de projeto
+        <select name="tipo">
+          <option>Site</option><option>API / sistema</option><option>Automação</option><option>Vaga</option><option>Outro</option>
+        </select>
+      </label>
+      <label>Mensagem<textarea name="mensagem" rows="5" required></textarea></label>
+      <button type="submit" class="btn btn--primary">Enviar mensagem →</button>
+    </form>
+  ) : (
+    <div class="card contato__cta">
+      <p class="mono dim">$ ./conversar --via linkedin</p>
+      <p>O jeito mais rápido de falar comigo é pelo LinkedIn.</p>
+      <a href={perfil.linkedin} target="_blank" rel="noopener" class="btn btn--primary">Vamos conversar ↗</a>
+    </div>
+  )}
+</section>
+
+<script>
+  // Sem serviço de formulário: monta um e-mail com o que a pessoa escreveu.
+  const form = document.querySelector<HTMLFormElement>('.contato__form[data-email]');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(form);
+    const assunto = `[Portfólio] ${f.get('tipo')} — ${f.get('nome')}`;
+    const corpo = `${f.get('mensagem')}\n\n${f.get('nome')} · ${f.get('email')}`;
+    location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+  });
+</script>
+
+<style>
+  .contato { display: flex; flex-wrap: wrap; gap: 48px; padding-bottom: 96px; }
+  .contato__texto { flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+  .contato__titulo { font-size: clamp(32px, 3.6vw, 48px); line-height: 1.05; }
+  .contato__p { margin: 0; max-width: 440px; font-size: 16px; line-height: 1.6; color: var(--muted); }
+  .contato__lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
+  .contato__lista a { display: inline-flex; gap: 14px; align-items: center; }
+  .contato__lista a:hover { color: var(--accent); }
+  .contato__form, .contato__cta { flex: 1 1 460px; min-width: 0; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .contato__form:hover, .contato__cta:hover { transform: none; }
+  .contato__cta { justify-content: center; align-items: flex-start; gap: 18px; padding: 40px; }
+  .contato__cta p { margin: 0; font-size: 18px; line-height: 1.5; }
+  .contato__cta .dim { font-size: 13px; color: var(--dim); }
+  .contato__linha { display: flex; flex-wrap: wrap; gap: 14px; }
+  .contato__linha label { flex: 1 1 180px; }
+  label { display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); }
+  input, select, textarea {
+    min-height: 44px; padding: 10px 12px; background: var(--bg); border: 1px solid #2a2f27; border-radius: 6px;
+    color: var(--text); font: 15px var(--sans); text-transform: none; letter-spacing: 0;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  textarea { resize: vertical; }
+  .contato__form .btn { justify-content: center; min-height: 50px; }
+</style>

@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import ProjetoCard from './ProjetoCard.astro';
+
+const todos = await getCollection('projetos');
+const ordenar = (a: (typeof todos)[number], b: (typeof todos)[number]) => a.data.ordem - b.data.ordem || b.data.ano - a.data.ano;
+const destaques = todos.filter((p) => p.data.destaque).sort(ordenar);
+const outros = todos.filter((p) => !p.data.destaque).sort((a, b) => b.data.ano - a.data.ano || a.data.codigo.localeCompare(b.data.codigo));
+const proximo = `PRJ-${String(destaques.length + 1).padStart(3, '0')}`;
+---
+<section id="projetos" class="wrap section">
+  <div class="proj__top">
+    <div>
+      <p class="eyebrow">Arquivo de projetos</p>
+      <h2 class="h2">Registros em destaque</h2>
+    </div>
+    {outros.length > 0 && <a href="#outros" class="mono accent proj__all">Ver todos os registros →</a>}
+  </div>
+
+  <div class="proj__grid">
+    {destaques.map((p) => <ProjetoCard projeto={p} />)}
+    <article class="proj__slot">
+      <div class="proj__slot-head mono">{proximo} · ---- · ----</div>
+      <div class="proj__slot-body">
+        <span class="mono" aria-hidden="true">+</span>
+        <h3>Próximo registro</h3>
+        <p>Aguardando captura. Novos projetos entram aqui com uma ficha nova.</p>
+      </div>
+    </article>
+  </div>
+
+  {outros.length > 0 && (
+    <div id="outros" class="outros">
+      <div class="outros__head mono">Outros registros do arquivo</div>
+      <ul>
+        {outros.map((p) => (
+          <li>
+            <a href={`/projetos/${p.id}/`}>
+              <span class="mono outros__cod">{p.data.codigo}</span>
+              <span class="mono outros__nome">{p.data.titulo}</span>
+              <span class="outros__desc">{p.data.resumo}</span>
+              <span class="mono outros__ano">{p.data.ano}</span>
+              <span class="accent" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</section>
+
+<style>
+  .proj__top { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; }
+  .proj__top .eyebrow { margin-bottom: 10px; }
+  .proj__all { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .proj__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .proj__slot { border: 1px dashed #3a4236; border-radius: 12px; display: flex; flex-direction: column; min-height: 420px; }
+  .proj__slot-head { padding: 12px 16px; border-bottom: 1px dashed #2a2f27; font-size: 12px; color: var(--dim); }
+  .proj__slot-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 32px; text-align: center; }
+  .proj__slot-body > span { font-size: 40px; color: #3a4236; }
+  .proj__slot-body h3 { margin: 0; font-size: 20px; color: var(--text-2); }
+  .proj__slot-body p { margin: 0; max-width: 240px; font-size: 14px; line-height: 1.6; color: var(--dim); }
+
+  .outros { margin-top: 36px; border: 1px solid #1f231e; border-radius: 10px; overflow: hidden; }
+  .outros__head { padding: 14px 20px; background: var(--panel); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+  .outros ul { list-style: none; margin: 0; padding: 0; }
+  .outros a { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; padding: 16px 20px; border-top: 1px solid #1a1d19; font-size: 14px; transition: background .15s; }
+  .outros a:hover { background: var(--panel); }
+  .outros__cod { width: 80px; color: var(--dim); }
+  .outros__nome { flex: 1 1 200px; }
+  .outros__desc { flex: 1 1 280px; color: var(--muted); }
+  .outros__ano { width: 48px; color: var(--dim); }
+</style>

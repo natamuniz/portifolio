@@ -1,0 +1,51 @@
+---
+import { perfil } from '../data/perfil';
+---
+<section id="sobre" class="wrap section sobre">
+  <div class="sobre__foto">
+    {perfil.foto
+      ? <img src={perfil.foto} alt={`Foto de ${perfil.nome} ${perfil.sobrenome}`} width="340" height="425" loading="lazy" />
+      : <div class="sobre__placeholder mono">[SUA FOTO]</div>}
+    <span class="sobre__barra" aria-hidden="true"></span>
+    <span class="sobre__carimbo mono" aria-hidden="true">Ficha · Autor</span>
+  </div>
+  <div class="sobre__texto">
+    <p class="eyebrow">Sobre mim</p>
+    <h2 class="sobre__titulo">
+      {perfil.sobreTitulo.map((t) => (typeof t === 'string' ? t : <span class="accent">{t.destaque}</span>))}
+    </h2>
+    {perfil.sobre.map((p) => <p class="sobre__p">{p}</p>)}
+    <ul class="sobre__fatos">
+      {perfil.fatos.map((f) => (
+        <li>
+          <span class="sobre__icone mono" aria-hidden="true">{f.icone}</span>
+          <div>
+            <div class="sobre__valor">{f.valor}</div>
+            <div class="sobre__rotulo mono">{f.rotulo}</div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .sobre { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding-top: 80px; padding-bottom: 80px; }
+  .sobre__foto { flex: 0 1 340px; min-width: 260px; position: relative; }
+  .sobre__foto img, .sobre__placeholder { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; border-radius: 10px; border: 1px solid var(--line-2); filter: grayscale(0.4); }
+  .sobre__placeholder { background: #131512; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--dim); }
+  @media (max-width: 700px) { .sobre__foto { flex-basis: 220px; min-width: 0; max-width: 240px; } }
+  .sobre__barra { position: absolute; left: -10px; top: 24px; bottom: 24px; width: 3px; background: var(--accent); box-shadow: 0 0 16px var(--accent); }
+  .sobre__carimbo {
+    position: absolute; right: 14px; bottom: 14px; padding: 6px 10px; border: 1px solid var(--accent); color: var(--accent);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; transform: rotate(-4deg); background: rgba(10, 11, 10, 0.8);
+  }
+  .sobre__texto { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+  .sobre__titulo { margin: 0; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.2; font-weight: 600; }
+  .sobre__p { margin: 0; max-width: 640px; font-size: 17px; line-height: 1.7; color: var(--muted); }
+  .sobre__fatos { list-style: none; margin: 8px 0 0; padding: 20px 0 0; border-top: 1px solid #1f231e; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+  .sobre__fatos li { display: flex; gap: 14px; align-items: center; }
+  .sobre__icone { width: 44px; height: 44px; flex: none; border: 1px solid var(--line-3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 14px; }
+  .sobre__valor { font-size: 18px; font-weight: 600; }
+  .sobre__rotulo { font-size: 11px; text-transform: uppercase; color: var(--dim); }
+</style>
