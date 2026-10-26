@@ -2,14 +2,14 @@
 import { perfil } from '../data/perfil';
 ---
 <section id="sobre" class="wrap section sobre">
-  <div class="sobre__foto">
-    {perfil.foto
-      ? <img src={perfil.foto} alt={`Foto de ${perfil.nome} ${perfil.sobrenome}`} width="340" height="425" loading="lazy" />
-      : <div class="sobre__placeholder mono">[SUA FOTO]</div>}
-    <span class="sobre__barra" aria-hidden="true"></span>
-    <span class="sobre__carimbo mono" aria-hidden="true">Ficha · Autor</span>
-  </div>
-  <div class="sobre__texto">
+  {perfil.foto && (
+    <div class="sobre__foto">
+      <img src={perfil.foto} alt={`Foto de ${perfil.nome} ${perfil.sobrenome}`} width="340" height="425" loading="lazy" />
+      <span class="sobre__barra" aria-hidden="true"></span>
+      <span class="sobre__carimbo mono" aria-hidden="true">Ficha · Autor</span>
+    </div>
+  )}
+  <div class:list={["sobre__texto", { "sobre__texto--solo": !perfil.foto }]}>
     <p class="eyebrow">Sobre mim</p>
     <h2 class="sobre__titulo">
       {perfil.sobreTitulo.map((t) => (typeof t === 'string' ? t : <span class="accent">{t.destaque}</span>))}
@@ -41,6 +41,7 @@ import { perfil } from '../data/perfil';
     font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; transform: rotate(-4deg); background: rgba(10, 11, 10, 0.8);
   }
   .sobre__texto { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+  .sobre__texto--solo { max-width: 920px; }
   .sobre__titulo { margin: 0; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.2; font-weight: 600; }
   .sobre__p { margin: 0; max-width: 640px; font-size: 17px; line-height: 1.7; color: var(--muted); }
   .sobre__fatos { list-style: none; margin: 8px 0 0; padding: 20px 0 0; border-top: 1px solid #1f231e; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }

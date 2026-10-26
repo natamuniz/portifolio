@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Registro não encontrado · Natã Muniz">
+  <section class="wrap nf">
+    <p class="mono accent">$ cat ./esta-pagina</p>
+    <p class="mono nf__err">cat: ./esta-pagina: registro não encontrado (404)</p>
+    <h1 class="h2">Esse registro não está no arquivo.</h1>
+    <a href="/" class="btn btn--primary">Voltar para o início →</a>
+  </section>
+</Base>
+<style>
+  .nf { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; padding-top: 96px; padding-bottom: 96px; }
+  .nf p { margin: 0; }
+  .nf__err { color: var(--dim); }
+</style>
