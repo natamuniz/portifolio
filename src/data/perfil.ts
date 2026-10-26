@@ -6,17 +6,17 @@ export const perfil = {
   iniciais: 'NM',
   cargo: 'Desenvolvedor back-end · PHP/Laravel e Python',
   chamada:
-    'Desenvolvo sistemas, automações, integrações de APIs e bancos de dados. Hoje sou responsável técnico por um SIGAD em conformidade com o e-ARQ Brasil. Cada projeto aqui é um registro catalogado, com ficha, data e prova de que funciona.',
+    'Desenvolvo sistemas, automações, integrações de APIs e bancos de dados. Hoje sou responsável técnico por um SIGAD em conformidade com o e-ARQ Brasil na Safe Conversão Digital. Cada projeto aqui é um registro catalogado, com ficha, data e prova de que funciona.',
   disponibilidade: '// aberto a freelas e novas oportunidades',
 
   linkedin: 'https://www.linkedin.com/in/nata-muniz/',
   github: 'https://github.com/natamuniz',
-  email: '', // ex.: 'voce@email.com' — vazio esconde o e-mail no site
+  email: 'natan.mtrindade@gmail.com', // vazio esconde o e-mail no site
   curriculo: '/curriculo.pdf', // arquivo em public/ — vazio esconde o botão
   // Endereço de um serviço de formulário (Formspree, Getform...). Vazio: o formulário abre o e-mail.
   formulario: '',
 
-  foto: '', // ex.: '/foto.jpg' em public/ — vazio mostra um placeholder
+  foto: '', // ex.: '/foto.jpg' em public/ — vazio esconde o espaço da foto
 
   // Sobre: cole aqui o "Sobre" do seu LinkedIn (um parágrafo por item).
   sobreTitulo: [
@@ -52,7 +52,7 @@ export const habilidades = [
 // Trajetória, do mais recente para o mais antigo. Aparece como um "git log".
 // Para incluir experiências profissionais do LinkedIn, adicione itens aqui.
 export const trajetoria = [
-  { hash: 'e4a90d3', ano: 'atual', mensagem: 'feat: SIGAD conforme o e-ARQ Brasil', descricao: 'Responsável técnico pelo desenvolvimento, com Laravel, PostgreSQL e Vue/Inertia, seguindo as resoluções do CONARQ.' },
+  { hash: 'e4a90d3', ano: 'atual', mensagem: 'feat: SIGAD @ Safe Conversão Digital', descricao: 'Responsável técnico pelo SIGAD em conformidade com o e-ARQ Brasil, com Laravel, PostgreSQL e Vue/Inertia, seguindo as resoluções do CONARQ.' },
   { hash: 'a7c21f0', ano: '2026', mensagem: 'feat: Arquiva, API de gestão documental', descricao: 'Laravel 13 e PostgreSQL 16, com temporalidade versionada, sigilo e auditoria imutável.' },
   { hash: 'b81e5c7', ano: '2026', mensagem: 'wip: ChegouAqui, SaaS de encomendas', descricao: 'Django, PostgreSQL e Celery: portaria registra o pacote e o morador recebe aviso no WhatsApp.' },
   { hash: '3e9b4d2', ano: '2026', mensagem: 'feat: site Forte do Forno no ar', descricao: 'Site estático com SEO local, uma página por serviço e deploy na Vercel.' },
