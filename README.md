@@ -62,3 +62,12 @@ Foto e currículo vão na pasta `public/` (por exemplo `public/foto.jpg` e `foto
 1. Em vercel.com, **Add New > Project** e importe este repositório.
 2. A Vercel detecta o Astro sozinha; não precisa mudar nada.
 3. Quando tiver o endereço final, troque `site` em `astro.config.mjs`.
+
+## Publicar na Cloudflare
+
+O repositório já tem `wrangler.jsonc` e `.node-version` (Node 22.22, o mínimo do Astro 7).
+
+- **Workers (Import a repository):** Build command `npm run build`, Deploy command `npx wrangler deploy`.
+- **Pages:** Framework preset `Astro`, Build command `npm run build`, Build output directory `dist`.
+
+Depois do primeiro deploy, troque `site` em `astro.config.mjs` e o endereço em `public/robots.txt` pelo endereço final.
