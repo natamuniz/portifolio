@@ -22,7 +22,7 @@ const url = `/projetos/${projeto.id}/`;
     <p>{d.resumo}</p>
     <div class="pcard__tags">{d.stack.slice(0, 4).map((s) => <span class="tag">{s}</span>)}</div>
     <div class="pcard__foot">
-      <span class="mono">{(d.link ?? d.repositorio ?? '').replace(/^https?:\/\//, '').replace(/\/$/, '')}</span>
+      <span class="mono">{d.link || d.repositorio ? (d.link ?? d.repositorio ?? '').replace(/^https?:\/\//, '').replace(/\/$/, '') : 'repositório privado'}</span>
       <span class="icon-btn" aria-hidden="true">↗</span>
     </div>
   </div>

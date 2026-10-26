@@ -38,7 +38,7 @@ export const perfil = {
 } as const;
 
 export const habilidades = [
-  { icone: '{ }', titulo: 'Back-end e APIs', texto: 'APIs REST em Laravel com autenticação por token, perfis de acesso e filas.' },
+  { icone: '{ }', titulo: 'Back-end e APIs', texto: 'APIs REST em Laravel e Django, com autenticação por token, perfis de acesso e filas.' },
   { icone: '▤', titulo: 'Banco de dados', texto: 'Modelagem em PostgreSQL e MySQL, consultas recursivas e regras garantidas no banco.' },
   { icone: '⚡', titulo: 'Sites rápidos e SEO', texto: 'HTML, CSS e JS puros, imagens WebP, sitemap e dados estruturados para o Google.' },
   { icone: '>_', titulo: 'Automação em Python', texto: 'OCR, separação de PDFs e rotinas que tiram trabalho repetitivo do caminho.' },
@@ -50,7 +50,9 @@ export const habilidades = [
 // Para incluir experiências profissionais do LinkedIn, adicione itens aqui.
 export const trajetoria = [
   { hash: 'a7c21f0', ano: '2026', mensagem: 'feat: Arquiva, API de gestão documental', descricao: 'Laravel 13 e PostgreSQL 16, com temporalidade versionada, sigilo e auditoria imutável.' },
+  { hash: 'b81e5c7', ano: '2026', mensagem: 'wip: ChegouAqui, SaaS de encomendas', descricao: 'Django, PostgreSQL e Celery: portaria registra o pacote e o morador recebe aviso no WhatsApp.' },
   { hash: '3e9b4d2', ano: '2026', mensagem: 'feat: site Forte do Forno no ar', descricao: 'Site estático com SEO local, uma página por serviço e deploy na Vercel.' },
   { hash: 'f02a8c1', ano: '2025', mensagem: 'feat: automações de OCR em Python', descricao: 'Scripts que leem e separam documentos sozinhos.' },
+  { hash: '6d2f9a4', ano: '2024', mensagem: 'feat: projetos em JavaScript e React', descricao: 'Robotron, calculadora de IMC e o Primeflix, um catálogo de filmes em React.' },
   { hash: '0000001', ano: '2022', mensagem: 'init: primeiros passos no front-end', descricao: 'HTML, CSS e JavaScript, os primeiros projetos no GitHub.' },
 ];
