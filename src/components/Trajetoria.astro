@@ -1,5 +1,5 @@
 ---
-import { trajetoria } from '../data/perfil';
+import { trajetoria, formacao } from '../data/perfil';
 ---
 <section id="trajetoria" class="wrap section">
   <p class="eyebrow">Trajetória</p>
@@ -17,6 +17,17 @@ import { trajetoria } from '../data/perfil';
       </li>
     ))}
   </ol>
+
+  <h3 class="mono traj__cmd traj__cmd--sub">$ cat formacao.txt</h3>
+  <ul class="form">
+    {formacao.map((f) => (
+      <li class="card form__item">
+        <span class:list={['form__status', 'mono', { 'is-on': f.status === 'cursando' }]}>{f.status}</span>
+        <h4>{f.curso}</h4>
+        <p class="mono">{f.instituicao}</p>
+      </li>
+    ))}
+  </ul>
 </section>
 <style>
   .traj__cmd { margin: 10px 0 24px; font-size: clamp(22px, 2.6vw, 30px); font-weight: 500; }
@@ -29,4 +40,12 @@ import { trajetoria } from '../data/perfil';
   .traj__msg { flex: 1 1 260px; min-width: 0; font-size: 15px; }
   .traj__head { color: var(--accent); }
   .traj__desc { flex: 1 1 320px; min-width: 0; font-size: 14px; line-height: 1.6; color: var(--muted); }
+  .traj__cmd--sub { margin-top: 56px; font-size: clamp(18px, 2vw, 22px); }
+  .form { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .form__item { padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .form__item:hover { transform: none; }
+  .form__item h4 { margin: 0; font-size: 19px; font-weight: 600; }
+  .form__item p { margin: 0; font-size: 13px; color: var(--dim); }
+  .form__status { align-self: flex-start; padding: 3px 8px; border: 1px solid var(--line-3); border-radius: 3px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .form__status.is-on { border-color: var(--accent); color: var(--accent); }
 </style>
