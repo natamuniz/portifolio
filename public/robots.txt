@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://natamuniz.vercel.app/sitemap-index.xml
+Sitemap: https://natamunizdev.com.br/sitemap-index.xml
