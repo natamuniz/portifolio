@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChegouAqui · PRJ-003 · Natã Muniz</title>
+    <meta name="description" content="SaaS para portarias de condomínio registrarem encomendas, avisarem o morador pelo WhatsApp e acompanharem cada pacote até a retirada." />
+    <link rel="canonical" href="https://natamunizdev.com.br/projetos/chegouaqui/" />
+    <meta property="og:title" content="ChegouAqui · PRJ-003 · Natã Muniz" />
+    <meta property="og:description" content="SaaS para portarias de condomínio registrarem encomendas, avisarem o morador pelo WhatsApp e acompanharem cada pacote até a retirada." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://natamunizdev.com.br/projetos/chegouaqui/" />
+    <meta name="theme-color" content="#0a0b0a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+    <link rel="stylesheet" href="/css/site.css?v=1793107461" />
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <header class="nav">
+  <nav class="wrap nav__in" aria-label="Principal">
+    <a href="/" class="nav__logo mono" aria-label="Página inicial">NM<span class="cursor">_</span></a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+    <div class="nav__links mono" id="nav-links">
+              <a href="/#inicio">Início</a>
+              <a href="/#sobre">Sobre</a>
+              <a href="/#habilidades">Habilidades</a>
+              <a href="/#projetos">Projetos</a>
+              <a href="/#trajetoria">Trajetória</a>
+              <a href="/#contato">Contato</a>
+            <a href="https://www.linkedin.com/in/nata-muniz/" target="_blank" rel="noopener" class="btn btn--ghost-accent nav__cta">Vamos conversar ↗</a>
+    </div>
+  </nav>
+</header>
+    <main id="conteudo">
+      <article class="wrap prj">
+    <a href="/#projetos" class="mono prj__voltar">← arquivo de projetos</a>
+
+    <header class="prj__head">
+      <p class="eyebrow">PRJ-003 · 2026 · SaaS</p>
+      <h1 class="prj__titulo">ChegouAqui</h1>
+      <p class="prj__resumo">SaaS para portarias de condomínio registrarem encomendas, avisarem o morador pelo WhatsApp e acompanharem cada pacote até a retirada.</p>
+      <div class="prj__ctas">
+                      </div>
+    </header>
+
+    <dl class="ficha mono">
+      <div><dt>Código</dt><dd>PRJ-003</dd></div>
+      <div><dt>Ano</dt><dd>2026</dd></div>
+      <div><dt>Tipo</dt><dd>SaaS</dd></div>
+              <div class="ficha__papel"><dt>Papel</dt><dd>Projeto pessoal, da arquitetura ao código</dd></div>
+                    <div class="ficha__stack"><dt>Stack</dt><dd><span class="tag">Django</span><span class="tag">DRF</span><span class="tag">PostgreSQL</span><span class="tag">Celery</span><span class="tag">Redis</span><span class="tag">Docker</span></dd></div>
+          </dl>
+
+          <pre class="prj__previa mono">POST /api/encomendas
+{
+  &quot;unidade&quot;: &quot;Bloco B · 302&quot;,
+  &quot;transportadora&quot;: &quot;Correios&quot;,
+  &quot;status&quot;: &quot;aguardando_retirada&quot;
+}
+→ WhatsApp enviado ao morador ✓</pre>
+    
+          <div class="prose"><h2>O problema</h2>
+<p>Em muitos condomínios, a portaria anota as encomendas num caderno e o morador só descobre que o pacote chegou quando passa por lá. Não há histórico de quem recebeu, quem retirou nem se um terceiro estava autorizado.</p>
+<h2>Como funciona</h2>
+<ol>
+<li>O porteiro registra a encomenda recebida.</li>
+<li>O sistema identifica a unidade e avisa o morador pelo WhatsApp.</li>
+<li>Morador, portaria e administração acompanham o status.</li>
+<li>A retirada é registrada, inclusive por terceiro autorizado.</li>
+<li>Operações importantes ficam numa trilha de auditoria.</li>
+</ol>
+<h2>Decisões técnicas</h2>
+<ul>
+<li><strong>Multitenant por coluna:</strong> cada condomínio é um tenant, e o isolamento é aplicado nas consultas, nas permissões, nos serviços e nos testes.</li>
+<li><strong>Monolito modular em Django:</strong> apps separados por domínio (portaria, encomendas, notificações, auditoria), com as regras de negócio em serviços fora das views.</li>
+<li><strong>Avisos em segundo plano:</strong> o envio pelo WhatsApp roda em filas com Celery e Redis.</li>
+<li><strong>LGPD e segredos:</strong> dados pessoais mínimos e nenhum token ou senha no repositório.</li>
+</ul>
+<blockquote>
+<p>Em desenvolvimento. O repositório é privado por enquanto.</p>
+</blockquote>
+</div>
+    
+    
+    <nav class="prj__nav mono" aria-label="Outros projetos">
+              <a href="/projetos/forte-do-forno/">← PRJ-002 Forte do Forno</a>
+                    <a href="/projetos/manexcel/">PRJ-000c MANEXCEL →</a>
+          </nav>
+  </article>
+    </main>
+    <footer class="foot">
+  <div class="wrap foot__in mono">
+    <span><span class="accent foot__logo">NM_</span> © 2026 Natã Muniz</span>
+    <span>Feito no Rio · registro atualizado em 27/10/2026</span>
+    <div class="foot__links">
+      <a class="icon-btn" href="https://github.com/natamuniz" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/nata-muniz/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="icon-btn" href="#conteudo" aria-label="Voltar ao topo">↑</a>
+    </div>
+  </div>
+</footer>
+    <script src="/js/site.js?v=1793107461" defer></script>
+  </body>
+</html>
