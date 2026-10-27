@@ -1,0 +1,57 @@
+# Testa o site e, a cada push na main, gera as páginas estáticas e publica na branch "site".
+# A Cloudflare Pages lê a branch "site" e serve a pasta dist/ sem precisar de PHP.
+name: Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  testar-e-gerar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: gd, mbstring
+          coverage: none
+
+      - name: Instalar dependências
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Preparar o .env
+        run: cp .env.example .env && php artisan key:generate
+
+      - name: Estilo do código (Pint)
+        run: vendor/bin/pint --test
+
+      - name: Testes
+        run: php artisan test
+
+      - name: Gerar o site estático
+        run: php artisan site:gerar
+
+      - name: Publicar na branch site
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          # A Cloudflare roda "npm run build"; aqui o site já vem pronto, então o build não faz nada.
+          echo '{ "private": true, "scripts": { "build": "echo O site já vem pronto do GitHub Actions" } }' > package.json
+          mkdir publicar && mv dist package.json publicar/
+          cd publicar
+          git init -q -b site
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Site gerado a partir de ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" site
