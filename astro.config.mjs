@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Troque pelo endereço final do site quando tiver domínio.
+// Endereço final do site (domínio próprio, apontado na Cloudflare Pages).
 export default defineConfig({
-  site: 'https://portifolio-efa.pages.dev',
+  site: 'https://natamunizdev.com.br',
   integrations: [sitemap()],
 });
