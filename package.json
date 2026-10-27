@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "php -v && composer -V && php -m && mkdir -p dist && echo ok > dist/index.html",
+    "build": "mkdir -p dist && (php -v > dist/index.html 2>&1 || echo sem-php > dist/index.html) && cat dist/index.html && php -v",
     "preview": "astro preview",
     "check": "astro check"
   },
