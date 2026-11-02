@@ -31,6 +31,11 @@ class GerarSiteTest extends TestCase
             'css/site.css',
             'projetos/arquiva/index.html',
             'projetos/forte-do-forno/index.html',
+            'projetos/ged/index.html',
+            'img/projetos/ged/capa-800.webp',
+            'img/projetos/ged/versoes-800.webp',
+            'img/projetos/ged/compartilhamento-800.webp',
+            'img/projetos/ged/mobile-800.webp',
             'img/projetos/forte-do-forno/capa-800.webp',
         ] as $arquivo) {
             $this->assertFileExists("{$site}/{$arquivo}");
