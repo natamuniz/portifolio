@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GED · PRJ-004 · Natã Muniz</title>
+    <meta name="description" content="Gestão eletrônica de documentos com API Laravel e interface Vue. Versionamento de arquivos, verificação de integridade, permissões por unidade e compartilhamento temporário com auditoria." />
+    <link rel="canonical" href="https://natamunizdev.com.br/projetos/ged/" />
+    <meta property="og:title" content="GED · PRJ-004 · Natã Muniz" />
+    <meta property="og:description" content="Gestão eletrônica de documentos com API Laravel e interface Vue. Versionamento de arquivos, verificação de integridade, permissões por unidade e compartilhamento temporário com auditoria." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://natamunizdev.com.br/projetos/ged/" />
+    <meta name="theme-color" content="#0a0b0a" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+    <link rel="stylesheet" href="/css/site.css?v=1793638427" />
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <header class="nav">
+  <nav class="wrap nav__in" aria-label="Principal">
+    <a href="/" class="nav__logo mono" aria-label="Página inicial">NM<span class="cursor">_</span></a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menu">
+      <span></span><span></span>
+    </button>
+    <div class="nav__links mono" id="nav-links">
+              <a href="/#inicio">Início</a>
+              <a href="/#sobre">Sobre</a>
+              <a href="/#habilidades">Habilidades</a>
+              <a href="/#projetos">Projetos</a>
+              <a href="/#trajetoria">Trajetória</a>
+              <a href="/#contato">Contato</a>
+            <a href="https://www.linkedin.com/in/nata-muniz/" target="_blank" rel="noopener" class="btn btn--ghost-accent nav__cta">Vamos conversar ↗</a>
+    </div>
+  </nav>
+</header>
+    <main id="conteudo">
+      <article class="wrap prj">
+    <a href="/#projetos" class="mono prj__voltar">← arquivo de projetos</a>
+
+    <header class="prj__head">
+      <p class="eyebrow">PRJ-004 · 2026 · Full-stack</p>
+      <h1 class="prj__titulo">GED</h1>
+      <p class="prj__resumo">Gestão eletrônica de documentos com API Laravel e interface Vue. Versionamento de arquivos, verificação de integridade, permissões por unidade e compartilhamento temporário com auditoria.</p>
+      <div class="prj__ctas">
+                          <a href="https://github.com/natamuniz/ged" target="_blank" rel="noopener" class="btn">Código no GitHub ↗</a>
+              </div>
+    </header>
+
+    <dl class="ficha mono">
+      <div><dt>Código</dt><dd>PRJ-004</dd></div>
+      <div><dt>Ano</dt><dd>2026</dd></div>
+      <div><dt>Tipo</dt><dd>Full-stack</dd></div>
+              <div class="ficha__papel"><dt>Papel</dt><dd>Projeto pessoal de estudo, da modelagem à API e à interface</dd></div>
+                    <div class="ficha__stack"><dt>Stack</dt><dd><span class="tag">Laravel 13</span><span class="tag">PHP 8.4</span><span class="tag">PostgreSQL 17</span><span class="tag">Vue 3</span><span class="tag">TypeScript</span><span class="tag">Docker</span></dd></div>
+          </dl>
+
+          <figure class="prj__capa">
+        <img src="/img/projetos/ged/capa-1440.webp" srcset="/img/projetos/ged/capa-800.webp 800w, /img/projetos/ged/capa-1440.webp 1350w" sizes="(max-width: 1240px) 100vw, 1192px" alt="Painel do GED com indicadores do acervo, documentos por tipo e abrangência de acesso da unidade Financeiro" width="1350" height="890" decoding="async" />
+      </figure>
+    
+          <div class="prose"><h2>O problema</h2>
+<p>Um acervo digital precisa manter o histórico dos arquivos, controlar o acesso entre unidades e permitir o compartilhamento de uma versão sem abrir todo o documento. Também precisa registrar as operações e detectar quando um arquivo já não corresponde ao conteúdo armazenado originalmente.</p>
+<p>Criei o GED como projeto pessoal de estudo para trabalhar essas regras em uma API Laravel, com PostgreSQL e uma interface separada em Vue e TypeScript.</p>
+<h2>O que eu fiz</h2>
+<ul>
+<li><strong>Acervo com versões:</strong> cadastro de documentos, envio de novas versões, filtros, paginação e download autorizado de arquivos privados.</li>
+<li><strong>Permissões por unidade:</strong> quatro perfis, concessões e bloqueios individuais, com abrangência herdada apenas pelas unidades descendentes.</li>
+<li><strong>Verificação de integridade:</strong> SHA-256 registrado no upload e conferência em segundo plano, distinguindo correspondência, divergência e falha de leitura.</li>
+<li><strong>Compartilhamento temporário:</strong> acesso a uma versão específica para destinatários autenticados, com agendamento, expiração, revogação e histórico de acessos.</li>
+<li><strong>Auditoria na API:</strong> consulta de eventos com filtros e controle de abrangência, além de registro de alterações e downloads autorizados.</li>
+<li><strong>Interface responsiva:</strong> painel do acervo, consulta de documentos, histórico de versões e fluxos de compartilhamento, com navegação adaptada ao celular.</li>
+</ul>
+<h2>Decisões técnicas</h2>
+<ul>
+<li><strong>API e interface separadas:</strong> Laravel concentra a autorização; o Vue apresenta as ações conforme as permissões retornadas pela API.</li>
+<li><strong>Sessão com Sanctum:</strong> autenticação por cookies e proteção CSRF, sem guardar tokens no localStorage.</li>
+<li><strong>Consistência entre banco e arquivos:</strong> compensação de arquivos quando o cadastro falha e bloqueio transacional para numerar novas versões.</li>
+<li><strong>Links com acesso restrito:</strong> o token de compartilhamento é persistido como hash, e o download revalida o destinatário, o prazo e a autorização do criador.</li>
+<li><strong>Ambiente reproduzível:</strong> Docker Compose reúne API, PostgreSQL, worker e frontend; os testes de backend usam um banco PostgreSQL separado.</li>
+</ul>
+<h2>Estado do projeto</h2>
+<p>O GED está em desenvolvimento, com código aberto sob GPL-3.0-or-later. A API já inclui administração, arquivamento, restauração e consulta de auditoria; as telas desses fluxos estão entre as próximas etapas do MVP.</p>
+<p>As capturas usam dados fictícios de validação. A verificação por hash detecta alterações em relação ao valor registrado; assinatura digital fica para uma etapa futura.</p>
+</div>
+    
+          <div class="prj__galeria">
+                  <figure>
+            <img src="/img/projetos/ged/versoes-800.webp" srcset="/img/projetos/ged/versoes-400.webp 400w, /img/projetos/ged/versoes-800.webp 800w" sizes="(max-width: 700px) 100vw, 400px" alt="Histórico de versões de um documento no GED" width="1365" height="1000" loading="lazy" decoding="async" />
+            <figcaption class="mono">Histórico de versões de um documento no GED</figcaption>
+          </figure>
+                  <figure>
+            <img src="/img/projetos/ged/compartilhamento-800.webp" srcset="/img/projetos/ged/compartilhamento-400.webp 400w, /img/projetos/ged/compartilhamento-800.webp 800w" sizes="(max-width: 700px) 100vw, 400px" alt="Interface de compartilhamento temporário de uma versão de documento no GED" width="1350" height="1461" loading="lazy" decoding="async" />
+            <figcaption class="mono">Interface de compartilhamento temporário de uma versão de documento no GED</figcaption>
+          </figure>
+                  <figure>
+            <img src="/img/projetos/ged/mobile-800.webp" srcset="/img/projetos/ged/mobile-800.webp 375w" sizes="(max-width: 700px) 100vw, 400px" alt="Interface do GED em uma tela de celular" width="375" height="812" loading="lazy" decoding="async" />
+            <figcaption class="mono">Interface do GED em uma tela de celular</figcaption>
+          </figure>
+              </div>
+    
+    <nav class="prj__nav mono" aria-label="Outros projetos">
+              <a href="/projetos/chegouaqui/">← PRJ-003 ChegouAqui</a>
+                    <a href="/projetos/manexcel/">PRJ-000c MANEXCEL →</a>
+          </nav>
+  </article>
+    </main>
+    <footer class="foot">
+  <div class="wrap foot__in mono">
+    <span><span class="accent foot__logo">NM_</span> © 2026 Natã Muniz</span>
+    <span>Feito no Rio · registro atualizado em 02/11/2026</span>
+    <div class="foot__links">
+      <a class="icon-btn" href="https://github.com/natamuniz" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+      <a class="icon-btn" href="https://www.linkedin.com/in/nata-muniz/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      <a class="icon-btn" href="#conteudo" aria-label="Voltar ao topo">↑</a>
+    </div>
+  </div>
+</footer>
+    <script src="/js/site.js?v=1793638427" defer></script>
+  </body>
+</html>
